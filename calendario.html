@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival - Programación</title>
+    <link rel="stylesheet" href="css/estilo.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/main.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>🎬 Gestor de Festival de Cine</h1>
+        <nav>
+            <a href="index.html">Películas</a>
+            <a href="calendario.html">Programación</a>
+            <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Programación (2-7 Nov 2026)</h2>
+        <div class="lista-peliculas-drag" id="lista-peliculas-drag">
+            <!-- Aquí se cargarán las películas arrastrables -->
+        </div>
+        <div id="calendar"></div>
+    </main>
+
+    <script type="module">
+        import { auth } from './js/firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { inicializarCalendario } from './js/calendario.js';
+        import './js/auth.js';
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+            } else {
+                inicializarCalendario();
+            }
+        });
+    </script>
+</body>
+</html>

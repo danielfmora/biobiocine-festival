@@ -1,0 +1,205 @@
+/* Estilos generales */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f4f7f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 1.5rem;
+}
+
+nav a {
+  color: white;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+/* Tabla de películas */
+.tabla-container {
+  overflow-x: auto;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 1.5rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+  background-color: #34495e;
+  color: white;
+  cursor: grab;
+}
+
+th.dragging {
+  opacity: 0.5;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.btn {
+  background: #3498db;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.btn-danger {
+  background: #e74c3c;
+}
+
+.btn-success {
+  background: #27ae60;
+}
+
+/* Formularios */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* Calendario */
+#calendar {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 1rem;
+}
+
+.lista-peliculas-drag {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #ecf0f1;
+  border-radius: 8px;
+}
+
+.pelicula-drag {
+  background: #3498db;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: grab;
+  user-select: none;
+  font-size: 0.9rem;
+}
+
+/* Ajustes de orden de columnas */
+.orden-columnas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.orden-item {
+  background: #bdc3c7;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: grab;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.orden-item span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  nav a {
+    margin: 0 0.5rem;
+  }
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festival - Películas</title>
+    <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+    <header>
+        <h1>🎬 Gestor de Festival de Cine</h1>
+        <nav>
+            <a href="index.html">Películas</a>
+            <a href="calendario.html">Programación</a>
+            <a href="#" onclick="cerrarSesion()">Cerrar sesión</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Películas</h2>
+        <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+            <button class="btn" onclick="abrirModalNueva()">➕ Nueva película</button>
+            <input type="file" id="excelFile" accept=".xlsx, .xls" style="display: none;" onchange="importarExcel(event)">
+            <button class="btn" onclick="document.getElementById('excelFile').click()">📥 Importar Excel</button>
+            <button class="btn" onclick="exportarExcel()">📤 Exportar Excel</button>
+        </div>
+
+        <!-- Configuración de orden de columnas -->
+        <div class="orden-columnas" id="orden-columnas"></div>
+
+        <!-- Tabla de películas -->
+        <div class="tabla-container">
+            <table id="tabla-peliculas">
+                <thead id="thead-peliculas"></thead>
+                <tbody id="tbody-peliculas"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Modal nueva película -->
+    <div id="modal-nueva" class="modal">
+        <div class="modal-content">
+            <h3>Nueva película</h3>
+            <form id="form-nueva">
+                <div class="form-group"><label>Título</label><input id="titulo" required></div>
+                <div class="form-group"><label>Director</label><input id="director"></div>
+                <div class="form-group"><label>País</label><input id="pais"></div>
+                <div class="form-group"><label>Año</label><input id="año" type="number"></div>
+                <div class="form-group"><label>Duración (min)</label><input id="duracion" type="number"></div>
+                <div class="form-group"><label>Sinopsis</label><textarea id="sinopsis"></textarea></div>
+                <div class="form-group"><label>Póster (imagen)</label><input id="imagen" type="file" accept="image/*"></div>
+                <button type="button" class="btn btn-success" onclick="guardarNueva()">Guardar</button>
+                <button type="button" class="btn" onclick="cerrarModal('modal-nueva')">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal editar película -->
+    <div id="modal-editar" class="modal">
+        <div class="modal-content">
+            <h3>Editar película</h3>
+            <input type="hidden" id="edit-id">
+            <div class="form-group"><label>Título</label><input id="edit-titulo"></div>
+            <div class="form-group"><label>Director</label><input id="edit-director"></div>
+            <div class="form-group"><label>País</label><input id="edit-pais"></div>
+            <div class="form-group"><label>Año</label><input id="edit-año" type="number"></div>
+            <div class="form-group"><label>Duración</label><input id="edit-duracion" type="number"></div>
+            <div class="form-group"><label>Sinopsis</label><textarea id="edit-sinopsis"></textarea></div>
+            <button type="button" class="btn btn-success" onclick="guardarEdicion()">Guardar</button>
+            <button type="button" class="btn" onclick="cerrarModal('modal-editar')">Cancelar</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth } from './js/firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+        import { cargarPeliculas, agregarPelicula } from './js/peliculas.js';
+        import { cambiarOrden } from './js/peliculas.js';
+        import './js/excel.js';
+        import './js/auth.js';
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = 'login.html';
+            } else {
+                cargarPeliculas();
+                initDragAndDropOrden();
+            }
+        });
+
+        window.abrirModalNueva = () => {
+            document.getElementById('modal-nueva').style.display = 'block';
+        };
+
+        window.cerrarModal = (id) => {
+            document.getElementById(id).style.display = 'none';
+        };
+
+        window.guardarNueva = async () => {
+            const formData = {
+                titulo: document.getElementById('titulo').value,
+                director: document.getElementById('director').value,
+                pais: document.getElementById('pais').value,
+                año: document.getElementById('año').value,
+                duracion: document.getElementById('duracion').value,
+                sinopsis: document.getElementById('sinopsis').value
+            };
+            const imagenFile = document.getElementById('imagen').files[0];
+            await agregarPelicula(formData, imagenFile);
+            cerrarModal('modal-nueva');
+            // limpiar formulario
+            document.getElementById('form-nueva').reset();
+        };
+
+        // Para ordenar columnas con drag & drop (simple)
+        function initDragAndDropOrden() {
+            // Esta función se llamará después de cargar las películas
+            // Crear lista de campos arrastrables
+        }
+    </script>
+</body>
+</html>
