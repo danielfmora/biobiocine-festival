@@ -6,12 +6,12 @@ import { getStorage } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-st
 
 // Configuración de tu proyecto (cámbiala por la tuya)
 const firebaseConfig = {
-  apiKey: "TU_API_KEY",
-  authDomain: "TU_AUTH_DOMAIN",
-  projectId: "TU_PROJECT_ID",
-  storageBucket: "TU_STORAGE_BUCKET",
-  messagingSenderId: "TU_SENDER_ID",
-  appId: "TU_APP_ID"
+  apiKey: "AIzaSyDLJkaibqhwlRHnduaZ8YpcKt8XhSpMJd4",
+  authDomain: "festivalapp-1d8a4.firebaseapp.com",
+  projectId: "festivalapp-1d8a4",
+  storageBucket: "festivalapp-1d8a4.firebasestorage.app",
+  messagingSenderId: "450300143597",
+  appId: "1:450300143597:web:f8088b228d80eeb61169e4"
 };
 
 // Inicializar Firebase
